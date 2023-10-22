@@ -11,12 +11,16 @@ static const char *const TAG = "gmt130v1";
 void GMT130V1::setup() {
   this->tft_ = new TFT_eSPI();
   this->tft_->init();
+  this->tft_->setSwapBytes(true);
+  this->tft_->initDMA();
   this->tft_->fillScreen(TFT_BLACK);
 
   this->spr_ = new TFT_eSprite(this->tft_);
   if (this->spr_->createSprite(get_width_internal(), get_height_internal()) == nullptr) {
     this->mark_failed();
   }
+
+  this->tft_->startWrite();
 }
 
 void GMT130V1::dump_config() {
