@@ -8,7 +8,6 @@ from esphome.const import (
     CONF_ID,
     CONF_LAMBDA,
     CONF_WIDTH,
-    #CONF_CS_PIN,
     CONF_DC_PIN,
     CONF_RESET_PIN,
     CONF_NUMBER,
@@ -39,7 +38,6 @@ CONFIG_SCHEMA = cv.All(
             cv.Optional(CONF_LOAD_SMOOTH_FONTS, default=False): cv.boolean,
             cv.Optional(CONF_ENABLE_LIBRARY_WARNINGS, default=False): cv.boolean,
             cv.Optional(CONF_RESET_PIN, default=4): pins.gpio_output_pin_schema,
-            #cv.Optional(CONF_CS_PIN, default=6): pins.gpio_output_pin_schema,
             cv.Optional(CONF_DC_PIN, default=2): pins.gpio_output_pin_schema,
         }
     ).extend(cv.polling_component_schema("5s")),
@@ -55,22 +53,11 @@ async def to_code(config):
     cg.add_build_flag("-DCGRAM_OFFSET")
     cg.add_build_flag("-DTFT_RGB_ORDER=TFT_RGB")
     cg.add_build_flag("-DTFT_INVERSION_ON")
-    #cg.add_build_flag("-DTFT_PARALLEL_8_BIT")
     cg.add_build_flag(f"-DTFT_WIDTH={config[CONF_WIDTH]}")
     cg.add_build_flag(f"-DTFT_HEIGHT={config[CONF_HEIGHT]}")
     cg.add_build_flag(f"-DTFT_RST={config[CONF_RESET_PIN][CONF_NUMBER]}")
-    #cg.add_build_flag(f"-DTFT_CS={config[CONF_CS_PIN][CONF_NUMBER]}")
+    cg.add_build_flag(f"-DTFT_CS=-1")
     cg.add_build_flag(f"-DTFT_DC={config[CONF_DC_PIN][CONF_NUMBER]}")
-    #cg.add_build_flag("-DTFT_WR=8")
-    #cg.add_build_flag("-DTFT_RD=9")
-    #cg.add_build_flag("-DTFT_D0=39")
-    #cg.add_build_flag("-DTFT_D1=40")
-    #cg.add_build_flag("-DTFT_D2=41")
-    #cg.add_build_flag("-DTFT_D3=42")
-    #cg.add_build_flag("-DTFT_D4=45")
-    #cg.add_build_flag("-DTFT_D5=46")
-    #cg.add_build_flag("-DTFT_D6=47")
-    #cg.add_build_flag("-DTFT_D7=48")
     cg.add_build_flag("-DSPI_FREQUENCY=40000000")
     cg.add_build_flag("-DSPI_READ_FREQUENCY=20000000")
 
