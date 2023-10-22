@@ -1,1 +1,1 @@
-# gmt130-v1.0_st7789_esphome
+# gmt130v1_st7789_esphome
