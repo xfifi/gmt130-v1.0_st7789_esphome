@@ -25,7 +25,7 @@ CONF_LOAD_SMOOTH_FONTS = "load_smooth_fonts"
 CONF_ENABLE_LIBRARY_WARNINGS = "enable_library_warnings"
 
 GMT130V1 = gmt130v1_ns.class_(
-    "gmt130v1", cg.PollingComponent, display.DisplayBuffer
+    "GMT130V1", cg.PollingComponent, display.DisplayBuffer
 )
 
 CONFIG_SCHEMA = cv.All(
